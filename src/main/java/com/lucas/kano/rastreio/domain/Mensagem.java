@@ -9,25 +9,24 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table (name = "objeto")
-public class Objeto implements Serializable {
+@Table(name = "mensagem")
+public class Mensagem implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	private String codigo;
+	private String texto;
 
-	public Objeto() {
+	public Mensagem() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Objeto(Integer id, String codigo) {
+	public Mensagem(Integer id, String texto) {
 		super();
 		this.id = id;
-		this.codigo = codigo;
+		this.texto = texto;
 	}
 
 	public Integer getId() {
@@ -38,12 +37,12 @@ public class Objeto implements Serializable {
 		this.id = id;
 	}
 
-	public String getCodigo() {
-		return codigo;
+	public String getTexto() {
+		return texto;
 	}
 
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+	public void setTexto(String texto) {
+		this.texto = texto;
 	}
 
 	@Override
@@ -62,7 +61,7 @@ public class Objeto implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Objeto other = (Objeto) obj;
+		Mensagem other = (Mensagem) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

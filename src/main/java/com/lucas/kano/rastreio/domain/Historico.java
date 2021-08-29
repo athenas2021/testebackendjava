@@ -6,15 +6,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table (name = "historico")
 public class Historico implements Serializable {	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String descricao;
+	
+	@ManyToOne
+	@JoinColumn(name = "mensagem_id")
+	private Mensagem mensagem;
+	
+	@ManyToOne
+	@JoinColumn(name = "objeto_id")
 	private Objeto objeto;
 
 	public Historico() {
@@ -22,10 +32,10 @@ public class Historico implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Historico(Integer id, String descricao, Objeto objeto) {
+	public Historico(Integer id, Mensagem mensagem, Objeto objeto) {
 		super();
 		this.id = id;
-		this.descricao = descricao;
+		this.mensagem = mensagem;
 		this.objeto = objeto;
 	}
 
@@ -37,12 +47,12 @@ public class Historico implements Serializable {
 		this.id = id;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public Mensagem getMensagem() {
+		return mensagem;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setMensagem(Mensagem mensagem) {
+		this.mensagem = mensagem;
 	}
 
 	public Objeto getObjeto() {
