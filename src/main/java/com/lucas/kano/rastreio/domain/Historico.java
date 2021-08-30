@@ -1,6 +1,8 @@
 package com.lucas.kano.rastreio.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,61 +10,46 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table (name = "historico")
-public class Historico implements Serializable {	
+@Table(name = "historico")
+public class Historico  implements Serializable {
+
 	private static final long serialVersionUID = 1L;
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@ManyToOne
-	@JoinColumn(name = "mensagem_id")
-	private Mensagem mensagem;
+	@OneToMany
+	@JoinColumn(name = "historico_id")
+	private List<Registro> registros = new ArrayList<>();
 	
-	@ManyToOne
-	@JoinColumn(name = "objeto_id")
-	private Objeto objeto;
-
 	public Historico() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public Historico(Integer id, Mensagem mensagem, Objeto objeto) {
+	public Historico(Integer id, List<Registro> registros) {
 		super();
 		this.id = id;
-		this.mensagem = mensagem;
-		this.objeto = objeto;
+		this.registros = registros;
 	}
-
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public Mensagem getMensagem() {
-		return mensagem;
+	public List<Registro> getRegistros() {
+		return registros;
 	}
-
-	public void setMensagem(Mensagem mensagem) {
-		this.mensagem = mensagem;
+	public void setRegistros(List<Registro> registros) {
+		this.registros = registros;
 	}
-
-	public Objeto getObjeto() {
-		return objeto;
-	}
-
-	public void setObjeto(Objeto objeto) {
-		this.objeto = objeto;
-	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -70,7 +57,6 @@ public class Historico implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -87,5 +73,7 @@ public class Historico implements Serializable {
 			return false;
 		return true;
 	}
+	
+	
 
 }
